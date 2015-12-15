@@ -1,0 +1,99 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
+ 
+//==================================================
+// Definicja typu listowego:
+ 
+struct wezel_listy {
+  int glowa; struct wezel_listy * ogon;
+};
+typedef  struct wezel_listy *  Lista;
+ 
+//==================================================
+//Operacje na liscie:
+ 
+void  dodaj_do_listy(int liczba, Lista* lis) {
+  // dodaje liczbe do listy z zachowaniem uporzadkowania
+  Lista pom = (Lista)malloc(sizeof(struct wezel_listy));
+  if (*lis == NULL || liczba < (*lis)->glowa) {
+    pom->glowa = liczba; pom->ogon = *lis; *lis = pom;
+  }
+  else  dodaj_do_listy(liczba, &((*lis)->ogon));
+}
+ 
+ 
+void  usun_z_listy(int liczba, Lista* lis) {
+  // usuwa z listy pierwsze wystapienie podanej liczby
+  if (*lis != NULL && liczba == (*lis)->glowa)
+  {
+    Lista pom = (*lis)->ogon;
+    free(*lis);
+    *lis = pom;
+  }
+  else  if (*lis != NULL && liczba > (*lis)->glowa)
+    usun_z_listy(liczba, &((*lis)->ogon));
+}
+ 
+ 
+void  drukas_listy(Lista lis) {
+  if (lis != NULL) {
+    printf("  %i\n", lis->glowa);
+    drukas_listy(lis->ogon);
+  }
+}
+ 
+//==================================================
+//Testowanie:
+ 
+char menu() {
+  char ch;
+  printf("\nD -- dodaj liczbe\n");
+  printf("U -- usun liczbe\n");
+  printf("P -- drukuj liste\n");
+  printf("Q -- zakoncz\n");
+  do { scanf("%c", &ch); }
+  while (ch < '!' || ch > '~');
+  return tolower(ch);
+}
+ 
+ 
+int main () {
+  Lista moja_lista = NULL;
+  int koniec = 0, liczba;
+  float bardzoDuzo = 2000000000;
+  // while (!koniec) {
+  //   switch (menu()) {
+  //     case 'd' : printf("\nDODAWANIE DO LISTY\n");
+  //                printf("Podaj liczbe: ");  scanf("%i", &liczba);
+        //       dodaj_do_listy(liczba, &moja_lista);
+  //                printf("Liczba %i dodana.\n", liczba);
+  //                break;
+  //     case 'u' : printf("\nUSUWANIE Z LISTY\n");
+  //                printf("Podaj liczbe: ");  scanf("%i", &liczba);
+        //       usun_z_listy(liczba, &moja_lista);
+  //                printf("Liczba %i usunieta.\n", liczba);
+  //                break;
+  //     case 'p' : printf("\nDRUKOWANIE LISTY\n");
+  //                printf("\nStan listy:\n");
+  //                drukas_listy(moja_lista);
+  //                printf("Koniec listy.\n");
+  //                break;
+  //     case 'q' : koniec = 1;
+  //                break;
+  //     default  : printf("\nZLE POLECENIE\n");
+  //                break;
+  //   }
+  // }
+  int i;
+  for (i = 0; i < bardzoDuzo; i++){
+    int r = rand();
+    dodaj_do_listy(r, &moja_lista);
+    usun_z_listy(r, &moja_lista);
+  }
+ 
+  printf("\nDZIEKUJE.\n\n");
+  return 0;
+}
+ 
+//==================================================

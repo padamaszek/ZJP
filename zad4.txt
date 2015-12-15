@@ -1,0 +1,44 @@
+a)
+• dla „()()”
+<S> →  <S><A> → <S>(<S>) →  <S><A>(<S>) → <S>(<S>)(<S>) →  (<S>)(<S>) →  ()(<S>) →  ()()
+ 
+• dla „(())”
+<S> → <S><A> → <A> → (<S>) →(<S><A>) → (<A>) → ((<S>)) → (())
+ 
+• dla „(()(()))”
+<S> → <S><A> → <S>(<S>) → (<S>) → (<S><A>) → (<S><A><A>) →
+→ (<A><A>) → ((<S>)<A>) → (()<A>) → (()(<S>)) → (()(<S><A>)) →
+→ (()(<A>)) → (()((<S>))) → (()(()))
+ 
+b)
+• dla „dk”
+<prog> → <dekl><instr> → d<instr> → d<kom> → dk
+ 
+• dla „ddkk”
+<prog> → <dekl><instr> → <dekl>d<instr> → dd<instr> → dd<instr><kom> → dd<kom><kom> → ddk<kom> → ddkk
+ 
+ 
+• dla „dk{ddk}k{d{dk}}”
+<prog> → <dekl><instr> →
+<dekl><instr><kom> →
+<dekl><instr>{<prog>} →
+<dekl><instr>{<dekl><instr>} →
+<dekl><instr>{d<instr>} →
+<dekl><instr>{d<kom>} →
+<dekl><instr>{d{<prog>}} →
+<dekl><instr>{d{<dekl><instr>}} →
+<dekl><instr>{d{d<instr>}} →
+<dekl><instr>{d{d<kom>}}→
+<dekl><instr>{d{dk}}→
+<dekl><instr><kom>{d{dk}} →
+<dekl><instr>k{d{dk}} →
+<dekl><instr><kom>k{d{dk}} →
+<dekl><instr>{<prog>}k{d{dk}} →
+<dekl><instr>{<dekl><instr>}k{d{dk}} →
+<dekl><instr>{<dekl>d<instr>}k{d{dk}} →
+<dekl><instr>{dd<instr>}k{d{dk}} →
+<dekl><instr>{dd<kom>}k{d{dk}} →
+<dekl><instr>{ddk}k{d{dk}} →
+<dekl><kom>{ddk}k{d{dk}} →
+<dekl>k{ddk}k{d{dk}} →
+dk{ddk}k{d{dk}}
